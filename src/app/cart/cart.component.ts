@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {products} from "../products";
 import {getCart, updateCart} from "../localStorageService";
 
@@ -7,7 +7,10 @@ import {getCart, updateCart} from "../localStorageService";
   templateUrl: './cart.component.html',
   styleUrls: ['./cart.component.scss']
 })
-export class CartComponent {
+export class CartComponent implements OnInit {
+  ngOnInit(): void {
+    this.initPrice();
+  }
   products = products;
   cart: any[] = getCart();
   cartTotal = 0;
@@ -49,6 +52,17 @@ export class CartComponent {
       result += parseInt(<string>price);
     });
 
+    this.cartTotal = result;
+  }
+
+  initPrice() {
+    let result = 0;
+    this.cart.forEach((product) => {
+      const productData = this.products.find(element => element.id === product.id);
+      if(productData) {
+        result += product.quantity * parseInt(productData.specifications.price.replace(/\D/g, ""))
+      }
+    });
     this.cartTotal = result;
   }
 }
