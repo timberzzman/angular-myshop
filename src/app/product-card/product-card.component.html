@@ -1,0 +1,23 @@
+<div class="max-w-sm border border-gray-300 rounded-lg shadow-md bg-gray-100 mx-auto">
+  <a href="#">
+    <img class="rounded-t-lg h-56 mx-auto" src="../assets/products/{{ product.picture }}" alt="{{ product.name }}-image" />
+  </a>
+  <div class="p-5">
+    <div class="flex justify-between">
+      <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900">{{ product.name }}</h5>
+      <div class="h-8 w-8 rounded rounded-full border-gray-600 border" [ngStyle]="{'background-color': product.specifications.color}"></div>
+    </div>
+
+    <div class="flex justify-between">
+      <p class="mb-3 font-normal text-gray-700 dark:text-gray-600">Weight: {{ product.specifications.weight }}</p>
+      <p class="mb-3 font-normal text-gray-700 dark:text-gray-600"
+         *ngIf="product.specifications.storage !== 'N/A'">Storage: {{ product.specifications.storage }}</p>
+    </div>
+    <div class="flex justify-between">
+      <a href="#" (click)="setElementInCart(product.id)" (mouseover)="isHover(true)" (mouseout)="isHover(false)" [ngClass]="productIsInCart(product.id) ? 'bg-red-700 hover:bg-red-800 focus:ring-red-300' : 'bg-blue-700 hover:bg-blue-800 focus:ring-blue-300'" class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white rounded-lg focus:ring-1 focus:outline-none">
+        <img class="h-6 w-6" src="assets/cart-plus-solid.svg" alt="" style="filter: invert(1);">
+      </a>
+      <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900">{{ product.specifications.price }}</h5>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,9 @@
+<div class="pb-10">
+  <h2 class="text-5xl pb-10 text-center" [ngClass]="isHover ? 'text-red-600': 'text-dark'">{{ !isHover ? 'Products' : 'Did you want to add this product to cart ?'}}</h2>
+
+  <div class="grid grid-cols-5 grid-flow-row gap-x-4 gap-y-10">
+    <div *ngFor="let product of products">
+      <app-product-card [product]="product" (isHoverEvent)="setHover($event)"></app-product-card>
+    </div>
+  </div>
+</div>
